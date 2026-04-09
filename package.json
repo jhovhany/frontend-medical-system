@@ -1,0 +1,39 @@
+{
+  "name": "frontend-medical-system",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,vue}\"",
+    "format": "prettier --write \"src/**/*.{ts,vue,css}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Medical System frontend built with Vue 3, Vite, TypeScript and Docker",
+  "dependencies": {
+    "axios": "^1.15.0",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.32",
+    "vue-router": "^4.6.4",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.57.0",
+    "@types/node": "^25.5.2",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^9.33.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.4.21",
+    "vue-tsc": "^3.2.6"
+  }
+}
