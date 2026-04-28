@@ -2,6 +2,11 @@
 
 Frontend medico modular con Vue 3, Vite y TypeScript, listo para produccion con Docker + Nginx.
 
+El repositorio soporta dos modos Docker:
+
+- Produccion: build estatico de Vite servido por Nginx
+- Desarrollo: Vite dev server con hot reload y volumen del codigo fuente
+
 ## Stack
 
 - Vue 3 + Vite + TypeScript
@@ -48,7 +53,9 @@ frontend-medical-system/
   nginx/
     default.conf.template
   Dockerfile
+  Dockerfile.dev
   docker-compose.yml
+  docker-compose.dev.yml
   .env.example
   .env.docker.example
 ```
@@ -106,7 +113,7 @@ Navegador -> Backend directo
 3. Ejecuta: `npm run dev`
 4. Abre `http://localhost:5173`
 
-### 2. Frontend Docker (modo proxy recomendado)
+### 2. Frontend Docker produccion (modo proxy recomendado)
 
 1. Crea red compartida una vez:
    - `docker network create medical_shared_network`
@@ -114,11 +121,23 @@ Navegador -> Backend directo
 3. Define upstream backend interno, por ejemplo:
   - Frontend solo (backend en host): `BACKEND_UPSTREAM=http://host.docker.internal:8000`
   - Frontend + backend en red compartida: `BACKEND_UPSTREAM=http://backend:8000`
-4. Levanta frontend:
+4. Levanta frontend en produccion:
    - `docker compose up -d --build`
 5. Abre `http://localhost:5173`
 
-### 3. Frontend + backend en repos separados con red compartida
+### 3. Frontend Docker desarrollo (hot reload)
+
+1. Crea red compartida una vez (si no existe):
+  - `docker network create medical_shared_network`
+2. Opcional: ajusta variables en `.env` (o exportalas) para desarrollo.
+  - `VITE_API_URL=/api`
+  - `BACKEND_UPSTREAM=http://host.docker.internal:8000`
+3. Levanta frontend en modo desarrollo:
+  - `docker compose -f docker-compose.dev.yml up --build`
+4. Abre `http://localhost:5173`
+5. Hot reload habilitado con polling (`CHOKIDAR_USEPOLLING=true`) para entornos Docker/Linux.
+
+### 4. Frontend + backend en repos separados con red compartida
 
 1. En ambos repos, usa la misma red externa:
    - `medical_shared_network` (o la que definas en `SHARED_DOCKER_NETWORK`)
@@ -127,7 +146,7 @@ Navegador -> Backend directo
 4. Mantén `VITE_API_URL=/api` en frontend.
 5. Ajusta `BACKEND_UPSTREAM` al nombre/host interno accesible desde Nginx del frontend.
 
-### 4. Modo directo (fallback)
+### 5. Modo directo (fallback)
 
 1. Establece `VITE_API_URL=http://localhost:8000`.
 2. Ejecuta `npm run dev` o `docker compose up -d --build`.

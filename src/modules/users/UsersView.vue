@@ -1,5 +1,5 @@
 <template>
-  <CrudPanel title="Gestión de usuarios" :show-create="true" @create="resetForm">
+  <CrudPanel title="Gestión de usuarios dd xd" :show-create="true" @create="resetForm">
     <form class="form-grid" @submit.prevent="saveUser">
       <input v-model="form.full_name" placeholder="Nombre completo" required />
       <input v-model="form.email" type="email" placeholder="Correo" required />

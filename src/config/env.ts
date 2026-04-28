@@ -7,7 +7,7 @@ const getEnv = (key: string, fallback: string): string => {
 
 export const envConfig = {
   appTitle: getEnv('VITE_APP_TITLE', 'Sistema Medico Frontend'),
-  apiBaseUrl: getEnv('VITE_API_URL', 'http://localhost:8000'),
+  apiBaseUrl: getEnv('VITE_API_URL', '/api'),
   authLoginPath: getEnv('VITE_AUTH_LOGIN_PATH', '/api/auth/login'),
   authMePath: getEnv('VITE_AUTH_ME_PATH', '/api/auth/me'),
   authRefreshPath: getEnv('VITE_AUTH_REFRESH_PATH', '/api/auth/refresh'),
